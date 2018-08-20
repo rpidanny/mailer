@@ -4,7 +4,7 @@ const Boom = require('boom')
 const mail = require('../mail')
 const { methodNotAllowed, genericErrorHandler } = require('./errorHandlers')
 
-var whitelist = ['https://abhishek.pro.np']
+const whitelist = ['https://abhishek.pro.np']
 
 const corsOptions = {
   origin: function (origin, callback) {
