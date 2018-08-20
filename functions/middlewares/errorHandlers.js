@@ -18,7 +18,6 @@ exports.methodNotAllowed = (req, res) => {
 }
 
 exports.genericErrorHandler = (err, req, res, next) => {
-  logger.error(err)
 
   let error = newError(err)
   res.status(error.code).send({ error })

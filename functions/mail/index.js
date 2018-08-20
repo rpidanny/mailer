@@ -21,23 +21,10 @@ module.exports = app => {
     })
   })
   
-  app.post('/mail', (req, res) => {
+  app.post('/mail', (req, res, next) => {
     const result = util.validateEmail(req.body)
     if (result.error) {
-      return res
-        .status(httpStatus.BAD_REQUEST)
-        .send({
-          code: httpStatus.BAD_REQUEST,
-          message: httpStatus.getStatusText(httpStatus.BAD_REQUEST),
-          details:
-            result.error.details &&
-            result.error.details.map(err => {
-              return {
-                message: err.message,
-                param: err.path.join('.')
-              }
-            })
-        })
+      return next(result.error)
     }
     const { to, subject, text, from } = req.body
     const mailOptions = mailer.template(from, to, subject, text)
@@ -51,13 +38,6 @@ module.exports = app => {
           }
         })
       )
-      .catch(err => res
-        .status(httpStatus.INTERNAL_SERVER_ERROR)
-        .send({
-          code: httpStatus.INTERNAL_SERVER_ERROR,
-          message: httpStatus.getStatusText(httpStatus.INTERNAL_SERVER_ERROR),
-          details: err.message
-        })
-      )
+      .catch(err => next(err))
   })
 }
