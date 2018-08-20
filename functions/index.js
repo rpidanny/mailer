@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const httpStatus = require('http-status-codes')
 const mailer = require('./mailer')
+const util = require('./util')
 
 const mailTransport = mailer.getMailer()
 
@@ -33,10 +34,27 @@ exports.mail = functions.https.onRequest((request, response) => {
         message: httpStatus.getStatusText(httpStatus.BAD_REQUEST)
       })
   }
+  const result = util.validateEmail(request.body)
+  if (result.error) {
+    return response
+      .status(httpStatus.BAD_REQUEST)
+      .send({
+        code: httpStatus.BAD_REQUEST,
+        message: httpStatus.getStatusText(httpStatus.BAD_REQUEST),
+        details:
+          result.error.details &&
+          result.error.details.map(err => {
+            return {
+              message: err.message,
+              param: err.path.join('.')
+            }
+          })
+      })
+  }
   // const mailOptions = mailer.template('abhishekmaharjan1993@gmail.com', 'Serverless Test', 'Serverless mailer is working!!!')
   // mailTransport.sendMail(mailOptions)
   return response.send({
-    header: request.get(),
-    body: request.body
+    body: request.body,
+    validation: result
   })
 });
