@@ -12,10 +12,10 @@ const mailTransport = mailer.getMailer()
 exports.hello = functions.https.onRequest((request, response) => {
   if (request.method !== 'GET') {
     return response
-      .status(httpStatus.BAD_REQUEST)
+      .status(httpStatus.METHOD_NOT_ALLOWED)
       .send({
-        code: httpStatus.BAD_REQUEST,
-        message: httpStatus.getStatusText(httpStatus.BAD_REQUEST)
+        code: httpStatus.METHOD_NOT_ALLOWED,
+        message: httpStatus.getStatusText(httpStatus.METHOD_NOT_ALLOWED)
       })
   } 
   return response.json({
@@ -28,10 +28,10 @@ exports.hello = functions.https.onRequest((request, response) => {
 exports.mail = functions.https.onRequest((request, response) => {
   if (request.method !== 'POST') {
     return response
-      .status(httpStatus.BAD_REQUEST)
+      .status(httpStatus.METHOD_NOT_ALLOWED)
       .send({
-        code: httpStatus.BAD_REQUEST,
-        message: httpStatus.getStatusText(httpStatus.BAD_REQUEST)
+        code: httpStatus.METHOD_NOT_ALLOWED,
+        message: httpStatus.getStatusText(httpStatus.METHOD_NOT_ALLOWED)
       })
   }
   const result = util.validateEmail(request.body)
