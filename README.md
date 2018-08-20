@@ -32,7 +32,7 @@ See the detailed API Reference
 ### Example
 
 ```shell
-curl -X POST -H "Content-Type:application/json" https://us-central1-<project-id>.cloudfunctions.net/mail \
+curl -X POST -H "Content-Type:application/json" https://us-central1-<project-id>.cloudfunctions.net/api/mail \
   -d '{
     "from": "Example App",
     "to": "a@gmail.com",
