@@ -11,7 +11,7 @@ const mailTransport = mailer.getMailer()
 app.use(cors)
 
 // routes
-app.get('/hello', (req, res) => {
+app.get('/', (req, res) => {
   return res.json({
     data: {
       message: 'Hello World'
