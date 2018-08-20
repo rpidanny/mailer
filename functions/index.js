@@ -57,7 +57,10 @@ exports.mail = functions.https.onRequest((request, response) => {
     .sendMail(mailOptions)
     .then(data =>
       response.send({
-        data
+        data: {
+          success: true,
+          message: 'Email Sent'
+        }
       })
     )
     .catch(err => res
