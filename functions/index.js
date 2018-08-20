@@ -51,10 +51,21 @@ exports.mail = functions.https.onRequest((request, response) => {
           })
       })
   }
-  // const mailOptions = mailer.template('abhishekmaharjan1993@gmail.com', 'Serverless Test', 'Serverless mailer is working!!!')
-  // mailTransport.sendMail(mailOptions)
-  return response.send({
-    body: request.body,
-    validation: result
-  })
+  const { to, subject, text } = request.body
+  const mailOptions = mailer.template(to, subject, text)
+  mailTransport
+    .sendMail(mailOptions)
+    .then(data =>
+      response.send({
+        data
+      })
+    )
+    .catch(err => res
+      .status(httpStatus.INTERNAL_SERVER_ERROR)
+      .send({
+        code: httpStatus.INTERNAL_SERVER_ERROR,
+        message: httpStatus.getStatusText(httpStatus.INTERNAL_SERVER_ERROR),
+        details: err.message
+      })
+    )
 });
