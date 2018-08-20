@@ -5,10 +5,6 @@ const util = require('./util')
 
 const mailTransport = mailer.getMailer()
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-
 exports.hello = functions.https.onRequest((request, response) => {
   if (request.method !== 'GET') {
     return response
