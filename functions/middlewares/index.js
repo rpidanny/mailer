@@ -3,14 +3,13 @@ const cors = require('cors')
 const Boom = require('boom')
 const mail = require('../mail')
 const { methodNotAllowed, genericErrorHandler } = require('./errorHandlers')
-
-const whitelist = ['https://abhishek.pro.np']
+const { allowedOrigins } = require('../config')
 
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin) return callback(Boom.unauthorized('Unauthorized origin'))
     
-    if (whitelist.indexOf(origin) === -1) {
+    if (allowedOrigins.indexOf(origin) === -1) {
       return callback(Boom.unauthorized('Unauthorized origin'))
     }
     return callback(null, true)
