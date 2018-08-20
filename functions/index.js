@@ -1,14 +1,14 @@
 const functions = require('firebase-functions');
 const httpStatus = require('http-status-codes')
 const express = require('express')
-const cors = require('cors')({origin: true})
 const mailer = require('./mailer')
 const util = require('./util')
+const middlewares = require('./middlewares')
 
 const app = express()
 const mailTransport = mailer.getMailer()
 
-app.use(cors)
+middlewares(app)
 
 // routes
 app.get('/', (req, res) => {
