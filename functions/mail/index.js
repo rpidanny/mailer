@@ -1,3 +1,4 @@
+const Boom = require('boom')
 const mailer = require('./mailer')
 const util = require('../util')
 
@@ -17,19 +18,23 @@ module.exports = app => {
     if (result.error) {
       return next(result.error)
     }
-    const { to, subject, text, from } = req.body
-    const mailOptions = mailer.template(from, to, subject, text)
-    mailTransport
-      .sendMail(mailOptions)
-      .then(data =>
-        res.send({
-          data: {
-            success: true,
-            message: 'Email Sent'
-          }
-        })
-      )
-      .catch(err => next(err))
+    if (req.headers.origin && req.headers.origin === 'https://abhishek.pro.np') {
+      const { to, subject, text, from } = req.body
+      const mailOptions = mailer.template(from, to, subject, text)
+      mailTransport
+        .sendMail(mailOptions)
+        .then(data =>
+          res.send({
+            data: {
+              success: true,
+              message: 'Email Sent'
+            }
+          })
+        )
+        .catch(err => next(err))
+    } else {
+      return next(Boom.unauthorized('Invalid Origin'))
+    }
   })
 
   app.get('/test', (req, res) => {
