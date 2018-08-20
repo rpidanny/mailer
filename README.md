@@ -35,7 +35,7 @@ See the detailed API Reference
 curl -X POST -H "Content-Type:application/json" https://us-central1-<project-id>.cloudfunctions.net/mail \
   -d '{
     "from": "Example App",
-    "to": "abhishekmaharjan1993@gmail.com",
+    "to": "a@gmail.com",
     "subject": "Hello World",
     "text": "It works"
   }'
