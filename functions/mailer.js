@@ -1,7 +1,7 @@
 const functions = require('firebase-functions')
 const nodemailer = require('nodemailer')
 
-const APP_NAME = 'Serverless Mailer by rpidanny';
+const APP_NAME = 'Serverless Mailer';
 const EMAIL = functions.config().gmail.email;
 const PASS = functions.config().gmail.password;
 
