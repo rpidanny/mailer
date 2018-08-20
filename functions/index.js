@@ -51,8 +51,8 @@ exports.mail = functions.https.onRequest((request, response) => {
           })
       })
   }
-  const { to, subject, text } = request.body
-  const mailOptions = mailer.template(to, subject, text)
+  const { to, subject, text, from } = request.body
+  const mailOptions = mailer.template(from, to, subject, text)
   mailTransport
     .sendMail(mailOptions)
     .then(data =>
