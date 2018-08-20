@@ -24,3 +24,19 @@ This sample comes with a web-based UI for testing the function. To test it out:
  1. Deploy your project using `firebase deploy`
  1. Open the app using `firebase open hosting:site`, this will open a browser.
  1. Sign in the web app in the browser using Google Sign-In and delete your account using the button on the web app. You should receive email confirmations for each actions.
+
+## API
+
+See the detailed API Reference
+
+### Example
+
+```shell
+curl -X POST -H "Content-Type:application/json" https://us-central1-<project-id>.cloudfunctions.net/mail \
+  -d '{
+    "from": "Example App",
+    "to": "abhishekmaharjan1993@gmail.com",
+    "subject": "Hello World",
+    "text": "It works"
+  }'
+```
