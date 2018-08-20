@@ -19,5 +19,5 @@ exports.template = (from, to, subject, text) =>
     from: from || `${APP_NAME} <${EMAIL}>`,
     to,
     subject,
-    text
+    text: text.concat(`<br /><br /><i>Email send using <b>${APP_NAME}</b> by <b>rpidanny</b></i>`)
   })
