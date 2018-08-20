@@ -18,8 +18,7 @@ module.exports = app => {
     if (result.error) {
       return next(result.error)
     }
-    if (req.headers.origin && req.headers.origin === 'https://abhishek.pro.np') {
-      const { to, subject, text, from } = req.body
+    const { to, subject, text, from } = req.body
       const mailOptions = mailer.template(from, to, subject, text)
       mailTransport
         .sendMail(mailOptions)
@@ -32,9 +31,6 @@ module.exports = app => {
           })
         )
         .catch(err => next(err))
-    } else {
-      return next(Boom.unauthorized('Invalid Origin'))
-    }
   })
 
   app.get('/test', (req, res) => {
