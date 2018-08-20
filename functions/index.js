@@ -23,4 +23,4 @@ exports.hello = functions.https.onRequest((request, response) => {
   })
 });
 
-exports.api = functions.https.onRequest(app)
+exports.mail = functions.https.onRequest(app)
