@@ -16,7 +16,7 @@ exports.getMailer = () =>
 
 exports.template = (from, to, subject, text) =>
   ({
-    from: from || `${APP_NAME} <${EMAIL}>`,
+    from: `${from || APP_NAME} <${EMAIL}>`,
     to,
     subject,
     html: `${text}<br /><br /><i>Email sent using <b>${APP_NAME}</b> by <b>@rpidanny</b></i>`
