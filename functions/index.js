@@ -19,6 +19,15 @@ app.get('/hello', (req, res) => {
   })
 })
 
+app.get('/test', (req, res) => {
+  return res.json({
+    data: {
+      keys: Object.keys(req),
+      headers: req.headers
+    }
+  })
+})
+
 app.post('/mail', (req, res) => {
   const result = util.validateEmail(req.body)
   if (result.error) {
