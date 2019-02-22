@@ -7,10 +7,10 @@ const { allowedOrigins } = require('../config')
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin) return callback(Boom.unauthorized('Unauthorized origin'))
+    if (!origin) return callback(Boom.unauthorized('No Origin.'))
     
     if (allowedOrigins.indexOf(origin) === -1) {
-      return callback(Boom.unauthorized('Unauthorized origin'))
+      return callback(Boom.unauthorized(`Unauthorized Origin: ${origin}`))
     }
     return callback(null, true)
   }
